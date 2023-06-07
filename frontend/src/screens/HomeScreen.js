@@ -3,10 +3,16 @@ import products from "../Products";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Product from "../components/Product";
+import Header from "../components/Header";
 
 const HomeScreen = () => {
   return (
+
+   
     <div>
+
+
+
       <h1 className="text-center mt-5 mb-5">welcome to proshop</h1>
 
       <Row>
@@ -16,6 +22,7 @@ const HomeScreen = () => {
           </Col>
         ))}
       </Row>
+      
     </div>
   );
 };
