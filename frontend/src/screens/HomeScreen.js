@@ -1,18 +1,41 @@
-import React from "react";
-import products from "../Products";
+import React, { useEffect, useState } from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Product from "../components/Product";
-import Header from "../components/Header";
+import axios from 'axios'
 
 const HomeScreen = () => {
+
+
+  const [products,setProducts]=useState([])
+
+useEffect(()=>{
+
+  getAllProducts()
+
+},[])
+
+
+const getAllProducts=async()=>{
+
+  try{
+
+      const {data}=await axios.get('/api/products')
+      setProducts(data)
+      console.log('mh',products)
+  }
+
+  catch(err){
+
+    console.log(err)
+  }
+
+}
+
+
+
   return (
-
-   
     <div>
-
-
-
       <h1 className="text-center mt-5 mb-5">welcome to proshop</h1>
 
       <Row>
@@ -22,7 +45,6 @@ const HomeScreen = () => {
           </Col>
         ))}
       </Row>
-      
     </div>
   );
 };

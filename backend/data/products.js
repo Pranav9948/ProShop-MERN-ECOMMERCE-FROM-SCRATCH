@@ -1,6 +1,6 @@
 const products = [
     {
-      id:1,
+      
       name: 'Airpods Wireless Bluetooth Headphones',
       image: 'https://img.freepik.com/free-vector/headphones-wireless-realistic-composition-with-isolated-image-phones-with-power-bank-dock-station-with-reflections-vector-illustration_1284-73201.jpg?size=626&ext=jpg&ga=GA1.2.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -13,7 +13,7 @@ const products = [
       numReviews: 2,
     },
     {
-      id:2,
+    
       name: 'iPhone 11 Pro 256GB Memory',
       image: 'https://img.freepik.com/premium-psd/realistic-iphone-14-pro-max-3d-smartphone-screen-mockup-template-with-editable-background-psd_349001-545.jpg?size=626&ext=jpg&ga=GA1.1.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -26,7 +26,7 @@ const products = [
       numReviews: 3,
     },
     {
-      id:3,
+     
       name: 'Cannon EOS 80D DSLR Camera',
       image: 'https://img.freepik.com/free-vector/realistic-digital-photo-camera-tripod_1284-13126.jpg?size=626&ext=jpg&ga=GA1.1.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -39,7 +39,7 @@ const products = [
       numReviews: 5,
     },
     {
-      id:4,
+    
       name: 'Sony Playstation 4 Pro White Version',
       image: 'https://img.freepik.com/premium-photo/cyberpunk-gaming-controller-gamepad-joystick-illustration_691560-5778.jpg?size=626&ext=jpg&ga=GA1.1.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -52,7 +52,7 @@ const products = [
       numReviews: 10,
     },
     {
-      id:5,
+    
       name: 'Logitech G-Series Gaming Mouse',
       image: 'https://img.freepik.com/free-photo/red-computer-mouse_1260-13.jpg?size=626&ext=jpg&ga=GA1.1.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -65,7 +65,7 @@ const products = [
       numReviews: 12,
     },
     {
-      id:6,
+  
       name: 'Amazon Echo Dot 3rd Generation',
       image: 'https://img.freepik.com/free-photo/smart-speaker-house-control-innovative-technology_53876-102350.jpg?size=626&ext=jpg&ga=GA1.1.1383957968.1682508336&semt=robertav1_2_sidr',
       description:
@@ -79,4 +79,4 @@ const products = [
     },
   ]
 
-  module.exports=products
+  export default products

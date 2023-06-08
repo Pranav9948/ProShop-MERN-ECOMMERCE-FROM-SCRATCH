@@ -4,10 +4,10 @@ import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
 import Image from "react-bootstrap/Image";
 import { Link, useParams } from "react-router-dom";
-import products from "../Products";
 import Rating from "../components/Rating";
 import Button from "react-bootstrap/esm/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import axios from "axios";
 
 const ProductScreens = () => {
   const { id } = useParams();
@@ -20,15 +20,15 @@ const ProductScreens = () => {
     getProductDetails();
   }, [id]);
 
-  const getProductDetails = () => {
-    console.log("e", id);
 
-    const productDetail = products.find((p) => (p.id = id));
+  const  getProductDetails=async()=>{
+     
+    const {data}=await axios.get(`/api/products/${id}`)
 
-    console.log("2334", productDetail);
+      setproductDetails(data)
+  }
 
-    setproductDetails(productDetail);
-  };
+
 
   return (
     <div>
@@ -76,7 +76,7 @@ const ProductScreens = () => {
           <Col lg={3} md={3} sm={12} className="text-center" >
             <ListGroup className="ps-4 productDetailsPrice" >
               <ListGroup.Item>Price : <span className="ps-3">₹ {productDetails.price} </span></ListGroup.Item>
-              <ListGroup.Item>status: <span className="ps-3">{productDetails.countInStock} </span></ListGroup.Item>
+              <ListGroup.Item>status: <span className="ps-3">{productDetails.countInStock===0 ? 'out of stock' : `In stock` } </span></ListGroup.Item>
               
                 {
                      productDetails.countInStock===0 ? <ListGroup.Item><Button className="bg-success"  disabled >Add to Cart </Button></ListGroup.Item> :
