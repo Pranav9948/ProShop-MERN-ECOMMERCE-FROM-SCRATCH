@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
 
-function App() {
+function  App() {
   return (
     <div className="App">
       <Header />

@@ -8,7 +8,9 @@ import asyncHandler from "../middleware/asyncHandler.js";
 // @access  Public
 
 const getAllProducts=asyncHandler(async(req, res) => {
-   
+    
+console.log('123reach');
+
     const products=await Product.find({})
 
     res.json(products)

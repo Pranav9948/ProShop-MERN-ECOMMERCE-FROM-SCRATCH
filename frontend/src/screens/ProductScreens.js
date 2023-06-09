@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Col from "react-bootstrap/esm/Col";
 import Container from "react-bootstrap/esm/Container";
 import Row from "react-bootstrap/esm/Row";
@@ -7,36 +7,33 @@ import { Link, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
 import Button from "react-bootstrap/esm/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import axios from "axios";
+import { useGetProductDetailsQuery } from "../redux/slices/productsApiSlice";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
+
 
 const ProductScreens = () => {
   const { id } = useParams();
 
-  console.log('234',id);
-
-  const [productDetails, setproductDetails] = useState({});
-
-  useEffect(() => {
-    getProductDetails();
-  }, [id]);
-
-
-  const  getProductDetails=async()=>{
-     
-    const {data}=await axios.get(`/api/products/${id}`)
-
-      setproductDetails(data)
-  }
-
-
+ 
+   const {data:productDetails,isLoading,isError}= useGetProductDetailsQuery(id)
 
   return (
-    <div>
+    
+    <>
  
-        
+   {
+      isLoading ? (
 
+        <Loader/>
 
-      <Container>
+      ) : isError ? (
+
+        <Message variant={'danger'}>{isError?.data.message || isError.error }</Message>
+      ) : (
+
+        <div>
+        <Container>
         <Row>
           <Col lg={4} md={4} sm={12}>
             <Link to="/">
@@ -87,8 +84,15 @@ const ProductScreens = () => {
           </Col>
         </Row>
       </Container>
-    </div>
-  );
-};
+      </div>
+      )
+   }
+        
+
+
+     
+   </>
+  )
+}
 
 export default ProductScreens;
