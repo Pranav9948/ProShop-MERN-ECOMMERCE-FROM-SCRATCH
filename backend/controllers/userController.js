@@ -8,9 +8,17 @@ import { generateToken } from "../utils/generateToken.js";
 // @access  Public
 
 const authUser = asyncHandler(async (req, res) => {
+  console.log('123rxz')
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+
+  if(!user){
+
+  res.status(404)
+    
+    throw new Error('user not found')
+  }
 
   generateToken(res, user._id);
 

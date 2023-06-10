@@ -6,11 +6,14 @@ import { FaTrash } from 'react-icons/fa';
 import Card from 'react-bootstrap/Card';
 import { addToCart, removeFromCart } from '../redux/slices/cartSlice';
 import Message from '../components/Message';
+import { useNavigate } from 'react-router-dom';
 
 const CartScreen = () => {
 
 const dispatch=useDispatch()
 const [qty,setQty]=useState(0)
+
+const navigate=useNavigate()
 
 const cart=useSelector((state)=>state.cart)
 
@@ -35,6 +38,11 @@ const cartCount= cartItems.reduce((acc,curr)=>acc +Number(curr.qty),0)
 const cartTotalPrice=cartItems.reduce((acc,curr)=>acc+Number(curr.price)*Number(curr.qty),0)
 
 console.log('count',cartCount);
+
+const checkoutHandler=()=>{
+
+   navigate('/login?/redirect=/shipping')
+}
 
 
   return (
@@ -126,7 +134,7 @@ console.log('count',cartCount);
        
       <ListGroup.Item className='p-2 text-white'> <Card.Subtitle className="mb-2 text-white">₹{cartTotalPrice}</Card.Subtitle></ListGroup.Item>
         
-      <ListGroup.Item className='p-2'> <Button variant='warning'>Proceed to checkout</Button></ListGroup.Item>
+      <ListGroup.Item className='p-2'> <Button variant='warning'onClick={()=>checkoutHandler()}>Proceed to checkout</Button></ListGroup.Item>
 
 
         
