@@ -19,10 +19,94 @@ code {
    margin-left: 50px;
 }
 
+.checkoutTabs{
+
+  display: flex;
+  justify-content: center;
+  
+
+}
+
 @media only screen and (max-width: 600px) {
   .productDetailsPrice{
 
     margin-top: 20px;
     margin-left: 30px;
+ }
+
+
+
+ .navbarz{
+
+  width: 100%!important;
+ }
+
+ .cartImage{
+
+   height: 50px !important;
+   width: 60px!important;
+ }
+
+ .itemcartname{
+     margin-left: 10px;
+ }
+ .cartSubtotal{
+
+  margin: 60px  !important;
+  
+}
+
+.alertBox{
+
+  width: 50%!important;
+  margin-left: 80px;
+  margin-top: 60px!important;
+}
+
+.orderDBox{
+
+   text-align: center;
+    
+}
+
+.orderbox{
+
+  width: 90%;
+}
+
+.loginBtn{
+
+    margin: 10px auto !important;
+}
+
+a:-webkit-any-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.showOrderBox{
+
+  
+  text-align: center;
+  margin-top: 50px;
+  width: 90%;
+  margin-left: -30px;
+}
+
+.orderBoxName{
+   
+   font-size: 14px;
+}
+
+.orderBoxQty{
+
+   font-size: 10px;
+}
+
+ footer{
+
+  width: 100%;
+
  }
 }

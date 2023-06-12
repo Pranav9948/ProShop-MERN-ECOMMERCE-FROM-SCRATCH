@@ -44,7 +44,7 @@ const Header = () => {
 
   return (
     <div>
-      <Navbar bg="dark" expand="md" className="p-4">
+      <Navbar bg="dark" expand="md" className="p-4 navbarz">
         <Container>
           <Navbar.Brand href="#home" className="fs-2" style={{color:'white'}}>
             <img src={logo} alt="logo" />

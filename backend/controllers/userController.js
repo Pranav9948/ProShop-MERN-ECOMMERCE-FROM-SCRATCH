@@ -8,7 +8,7 @@ import { generateToken } from "../utils/generateToken.js";
 // @access  Public
 
 const authUser = asyncHandler(async (req, res) => {
-  console.log('123rxz')
+  
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
@@ -41,27 +41,37 @@ const authUser = asyncHandler(async (req, res) => {
 // @access  Public
 
 const registerUser = asyncHandler(async (req, res) => {
+
   const { name, email, password } = req.body;
+
+
 
   const userExist = await User.findOne({ email });
 
   if (userExist) {
+    
     res.status(404);
 
     throw new Error("user already Exist");
   } else {
+
+   
+
     const newUser = await User.create({
       name,
       email,
       password,
     });
 
-    generateToken(res, newUser._id);
+    console.log('newUser',newUser)
 
+    generateToken(res,newUser._id);
+
+    console.log('user success')
     res.status(200).send({ message: "user created successfully", newUser });
   }
 
-  res.send("register user");
+ 
 });
 
 // @desc    Logout User

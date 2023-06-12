@@ -4,7 +4,7 @@ import Jwt  from "jsonwebtoken";
 
  export const generateToken=(res,userId)=>{
 
-
+   
     //creating token using jst
 
 const token=Jwt.sign(
@@ -27,7 +27,9 @@ const token=Jwt.sign(
         maxAge:30*24*60*60*1000
     }
 
+
      res.cookie('jwt',token,cookieParams)
+
 
 }
 
