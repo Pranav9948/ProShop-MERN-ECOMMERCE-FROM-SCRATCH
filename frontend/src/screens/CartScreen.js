@@ -15,6 +15,7 @@ const CartScreen = () => {
   const navigate = useNavigate();
 
   const cart = useSelector((state) => state.cart);
+  const userInfo = useSelector((state) => state.login);
 
   const addTocartHandler = (product, qty) => {
     dispatch(addToCart({ ...product, qty }));
@@ -35,7 +36,15 @@ const CartScreen = () => {
   console.log("count", cartCount);
 
   const checkoutHandler = () => {
-    navigate("/login?/redirect=/shipping");
+    if(userInfo!==null){
+
+       navigate('/shipping')
+    }
+
+    else {
+
+      navigate('/login')
+    }
   };
 
   return (
@@ -47,8 +56,9 @@ const CartScreen = () => {
           <Row>
             <h2>Shopping Cart</h2>
 
-            {cartItems.map((items) => (
+            {cartItems.map((items, idx) => (
               <Col
+                key={items.image}
                 lg={7}
                 md={7}
                 xs={12}
@@ -56,47 +66,45 @@ const CartScreen = () => {
                 style={{ marginTop: "150px" }}
               >
                 <Row className="text-center">
-                 
-                    <Col md={2} xs={2}>
-                      <Image
-                        src={items.image}
-                        rounded
-                        className="border-none cartImage"
-                        style={{ height: "70px", width: "100px" }}
-                      />
-                    </Col>
+                  <Col md={2} xs={2}>
+                    <Image
+                      src={items.image}
+                      rounded
+                      className="border-none cartImage"
+                      style={{ height: "70px", width: "100px" }}
+                    />
+                  </Col>
 
-                    <Col md={4} xs={3} className="itemcartname mt-3 ms-3">
-                      <h6>{items.name.substring(0, 20)}</h6>
-                    </Col>
+                  <Col md={4} xs={3} className="itemcartname mt-3 ms-3">
+                    <h6>{items.name.substring(0, 20)}</h6>
+                  </Col>
 
-                    <Col md={2} xs={2} className="mt-3 me-1">
-                      <h5>₹{items.price}</h5>
-                    </Col>
+                  <Col md={2} xs={2} className="mt-3 me-1">
+                    <h5>₹{items.price}</h5>
+                  </Col>
 
-                    <Col md={1} xs={2} className="mt-3">
-                      <Form.Control
-                        as="select"
-                        value={items.qty}
-                        onChange={(e) =>
-                          addTocartHandler(items, Number(e.target.value))
-                        }
-                      >
-                        {[...Array(items.countInStock).keys()].map((x) => (
-                          <option value={x}>{x}</option>
-                        ))}
-                      </Form.Control>
-                    </Col>
+                  <Col md={1} xs={2} className="mt-3">
+                    <Form.Control
+                      as="select"
+                      value={items.qty}
+                      onChange={(e) =>
+                        addTocartHandler(items, Number(e.target.value))
+                      }
+                    >
+                      {[...Array(items.countInStock).keys()].map((x) => (
+                        <option value={x}>{x}</option>
+                      ))}
+                    </Form.Control>
+                  </Col>
 
-                    <Col md={2} xs={1} className="mt-3">
-                      <Button
-                        variant="danger"
-                        onClick={() => deleteCartItemHandler(items._id)}
-                      >
-                        <FaTrash />
-                      </Button>
-                    </Col>
-                
+                  <Col md={2} xs={1} className="mt-3">
+                    <Button
+                      variant="danger"
+                      onClick={() => deleteCartItemHandler(items._id)}
+                    >
+                      <FaTrash />
+                    </Button>
+                  </Col>
                 </Row>
               </Col>
             ))}

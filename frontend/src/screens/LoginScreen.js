@@ -6,6 +6,8 @@ import { setCredentials } from "../redux/slices/loginSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Message from "../components/Message";
+import Loader from "../components/Loader";
 const LoginScreen = () => {
   const userInfo = useSelector((state) => state.login);
 
@@ -17,14 +19,14 @@ const LoginScreen = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login, { isLoading ,isError }] = useLoginMutation();
 
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
 
   const redirect = sp.get("redirect") || "/";
 
-  console.log("userInfo", userInfo);
+
 
   useEffect(() => {
     if (userInfo.userInfo !== null) {
@@ -80,41 +82,56 @@ const LoginScreen = () => {
   };
 
   return (
-    <div>
-      <FormContainer>
-        <Container>
-          <h2 className="mb-5 text-center fw-bold text-white">Login</h2>
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : isError ? (
+        <Message variant="danger">
+          {isError?.data.message || isError.error}
+        </Message>
+      ) : (
+        <div>
+          <FormContainer>
+            <Container>
+              <h2 className="mb-5 text-center fw-bold text-white">Login</h2>
 
-          <Form className="login-form" onSubmit={handleFormSubmit}>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label className="text-white mb-2">Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                isInvalid={!!emailError}
-              />
-              <Form.Control.Feedback type="invalid">
-                {emailError}
-              </Form.Control.Feedback>
-            </Form.Group>
+              <Form className="login-form" onSubmit={handleFormSubmit}>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlInput1"
+                >
+                  <Form.Label className="text-white mb-2">
+                    Email address
+                  </Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="name@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    isInvalid={!!emailError}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {emailError}
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-            <Form.Group className="mb-3" controlId="exampleForm1.ControlInput1">
-              <Form.Label className="text-white mb-2">Password</Form.Label>
-              <Form.Control
-                type="password"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                isInvalid={!!passwordError}
-              />
-              <Form.Control.Feedback type="invalid">
-                {passwordError}
-              </Form.Control.Feedback>
-            </Form.Group>
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm1.ControlInput1"
+                >
+                  <Form.Label className="text-white mb-2">Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    placeholder="Enter password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    isInvalid={!!passwordError}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    {passwordError}
+                  </Form.Control.Feedback>
+                </Form.Group>
 
-            
                 <Button
                   variant="danger"
                   className="mb-5 mt-3 loginBtn"
@@ -122,11 +139,12 @@ const LoginScreen = () => {
                 >
                   Login
                 </Button>
-              
-          </Form>
-        </Container>
-      </FormContainer>
-    </div>
+              </Form>
+            </Container>
+          </FormContainer>
+        </div>
+      )}
+    </>
   );
 };
 

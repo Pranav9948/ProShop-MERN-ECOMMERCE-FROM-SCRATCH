@@ -4,9 +4,9 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Rating from "./Rating";
 
-const Product = ({ product }) => {
+const Product = ({ product,key }) => {
 
-  console.log('product',product);
+ 
   return (
     <div>
       <Card className="m-5">

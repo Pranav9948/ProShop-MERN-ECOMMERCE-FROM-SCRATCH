@@ -114,7 +114,12 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @access  private
 
 const updateUserProfile = asyncHandler(async (req, res) => {
+  
+   console.log('updatereach',req.body);
+  
   const user = await User.findById(req.user._id);
+
+
 
   if (user) {
 
@@ -129,10 +134,13 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
      const updatedUser=await user.save()
 
+     const name=updatedUser.name
+      const email=updatedUser.email
+
 
     res.status(200).json({
      "message":'user updated successfully',
-     updatedUser
+     name,email
     });
   } else {
     res.status(401);

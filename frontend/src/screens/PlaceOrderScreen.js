@@ -16,6 +16,8 @@ const PlaceOrderScreen = () => {
    
    const [ createOrder,{isLoading,isError}]=useCreateOrderMutation()
 
+   console.log('234',totalprice)
+
   useEffect(() => {
     if (!shippingAddress) {
       navigate("/shipping");
@@ -43,7 +45,7 @@ const placeOrder=async(e)=>{
 
         }).unwrap()
 
-        dispatch(clearCart())
+      
 
         console.log('res',res)
 
@@ -97,18 +99,18 @@ const placeOrder=async(e)=>{
              cartItems.map((x)=>(
           
           
-              <Row>
+              <Row key={x.name}>
                 <Col md={2} xs={2}>
                 
                  <img src={x.image} style={{height:'40px'}}/>
                 
                 </Col>
 
-                <Col md={5} xs={5} className="orderBoxName ms-1">{x.name}</Col>
+                <Col md={4} xs={5} className="orderBoxName ms-1">{x.name}</Col>
 
-                <Col md={2} xs={1}></Col>
+                <Col md={1} xs={1}></Col>
 
-                <Col md={3} xs={3} className="orderBoxQty">{`${x.qty} x ${x.price}=`} <span>₹{x.price*x.qty}</span></Col>
+                <Col md={4} xs={3} className="orderBoxQty">{`${x.qty} x ${x.price}=`} <span>₹{x.price*x.qty}</span></Col>
               </Row>
                     
              ))
@@ -117,7 +119,7 @@ const placeOrder=async(e)=>{
           </div>
         </Col>
 
-        <Col md={3} xs={12} className=" mx-auto my-auto ms-5">
+        <Col md={3} xs={12} className=" mx-auto my-auto ms-5 text-center">
 
     
     <ListGroup className="p-3 text-white showOrderBox">

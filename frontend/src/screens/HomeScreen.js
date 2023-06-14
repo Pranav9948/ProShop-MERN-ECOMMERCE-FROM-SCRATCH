@@ -34,8 +34,8 @@ const HomeScreen = () => {
       <h1 className="text-center mt-5 mb-5">welcome to proshop</h1>
 
       <Row>
-        {products?.map((product) => (
-          <Col sm={12} md={6} lg={4}>
+        {products?.map((product,idx) => (
+          <Col sm={12} md={6} lg={4} key={idx+2}>
             <Product product={product} />
           </Col>
         ))}
