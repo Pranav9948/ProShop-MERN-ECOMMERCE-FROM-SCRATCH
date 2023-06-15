@@ -7,54 +7,61 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import Rating from "../components/Rating";
 import Button from "react-bootstrap/esm/Button";
 import ListGroup from "react-bootstrap/ListGroup";
-import { useGetProductDetailsQuery } from "../redux/slices/productsApiSlice";
+import { useAddReviewMutation, useGetProductDetailsQuery } from "../redux/slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Form from "react-bootstrap/Form";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/slices/cartSlice";
 import { useSelector } from "react-redux";
-
-
+import { toast } from "react-toastify";
 
 const ProductScreens = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const dispatch=useDispatch()
-    const navigate=useNavigate()
-
+  const [rating, setRating] = useState(0);
+  const [comment,setComment]=useState('')
 
   const { id } = useParams();
 
-
   const [qty, setQty] = useState();
-
 
   const {
     data: productDetails,
     isLoading,
-    isError,
+    isError,refetch
   } = useGetProductDetailsQuery(id);
 
+  const [addReview,{isLoading:addReviewLoad, isError:addReviewErr}]=  useAddReviewMutation()
+
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...productDetails, qty }));
+    navigate("/cart");
+  };
 
 
-const addToCartHandler=()=>{
+  const handleSubmit=async(e)=>{
+
+    e.preventDefault()
+
+    try{
+
+      await addReview({rating,comment,id})
+      toast.success('review added successfully')
+      refetch()
+
+    }
+
+    catch(err){
+
+       console.log(err);
+        toast.error(err?.data.message || err.error)
+    }
 
 
-  dispatch(addToCart({...productDetails,qty}))
-  navigate('/cart')
-   
 
-}
-
-
-
-
-
-
-
-
-
-
+  }
 
   return (
     <>
@@ -148,10 +155,96 @@ const addToCartHandler=()=>{
                     </ListGroup.Item>
                   ) : (
                     <ListGroup.Item className="p-3">
-                      <Button className="bg-success" onClick={addToCartHandler}>Add to Cart </Button>
+                      <Button className="bg-success" onClick={addToCartHandler}>
+                        Add to Cart{" "}
+                      </Button>
                     </ListGroup.Item>
                   )}
                 </ListGroup>
+              </Col>
+            </Row>
+
+            <Row style={{ marginTop: "130px" }}>
+              <Col md={6} sm={12}>
+                <h3>Read Reviews </h3>
+
+                {productDetails.reviews.length === 0 ? (
+                  <div className="mt-5 text-center" style={{ width: "300px" }}>
+                    <Message variant="info">No reviews yet</Message>{" "}
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      width: "350px",
+                      height: "200px",
+                      overflow: "auto",
+                    }}
+                  >
+                    <ListGroup className="p-4">
+                      {productDetails.reviews.map((rev) => (
+                        <ListGroup.Item className="p-3" key={rev.name}>
+                          <h5 className="pb-2 text-danger">{rev.name}</h5>
+                          <Rating
+                            rating={rev.rating}
+                            numReviews={productDetails.numReviews}
+                          />
+                          <p className="pb-2 pt-2">{rev.comment}</p>
+                          <p className="pb-2">
+                            {rev.createdAt.substring(0, 10)}
+                          </p>
+                        </ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                  </div>
+                )}
+              </Col>
+             
+
+              
+
+              <Col md={5} sm={12}>
+
+              {
+                addReviewLoad && <Loader/>
+              }
+                <div className="text-center">
+                  <Message variant={"dark"}>Write a Customer Review</Message>
+                  </div>
+
+                  <Form className="review-form" onSubmit={handleSubmit}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="exampleForm.ControlInput13"
+                    >
+                      <Form.Label className="text-white mb-2 mt-3">
+                        Rating
+                      </Form.Label>
+                      <Form.Select
+                        type="select"
+                        className="mt-3 mb-3"
+                        onChange={(e) => setRating(e.target.value)}
+                        style={{width:'150px'}}
+                      >
+                        <option>select..</option>
+                        <option value="1">1--very poor</option>
+                        <option value="2">2--poor</option>
+                        <option value="3">3--average</option>
+                        <option value="4">4--good</option>
+                        <option value="5">5--very good</option>
+                      </Form.Select>
+                    </Form.Group>
+
+
+                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+        <Form.Label>write your opinion</Form.Label>
+        <Form.Control as="textarea" rows={3} onChange={(e)=>setComment(e.target.value)} />
+      </Form.Group>
+
+      <Button type="submit"> submit </Button>
+
+
+                  </Form>
+                
               </Col>
             </Row>
           </Container>

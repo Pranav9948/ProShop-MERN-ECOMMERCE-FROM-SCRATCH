@@ -59,10 +59,10 @@ const Header = () => {
                 Cart
               </Nav.Link>
 
-              {userInfo.isAdmin ? (
+              {userInfo!==null &&    userInfo?.isAdmin ? (
                 <NavDropdown
                   className="text-white"
-                  title={userInfo.name}
+                  title={userInfo?.name}
                   id="basic-nav-dropdown"
                 >
                   <Link
@@ -105,14 +105,14 @@ const Header = () => {
               ) : (
                 <NavDropdown
                   className="text-white"
-                  title={userInfo.name}
+                  title={userInfo?.name}
                   id="basic-nav-dropdown"
                 >
                   <NavDropdown.Item
                     onClick={() => logoutHandler()}
                     style={{ color: "white" }}
                   >
-                    Logout
+                    Login
                   </NavDropdown.Item>
                 </NavDropdown>
               )}

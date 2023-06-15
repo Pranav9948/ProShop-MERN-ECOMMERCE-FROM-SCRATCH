@@ -22,9 +22,21 @@ export const productApiSlice=apiSlice.injectEndpoints({
 
             keepUnusedDataFor:5,
         }),
+
+
+
+        addReview: builder.mutation({
+      query: (data) => ({
+        url: `${PRODUCTS_URL}/${data.id}/review`,  
+        method: "POST",
+        body:data
+       
+      }),
+    }),         
+    
        
     })
 })
 
 
-export const {useGetProductsQuery,useGetProductDetailsQuery}=productApiSlice
+export const {useGetProductsQuery,useGetProductDetailsQuery,useAddReviewMutation}=productApiSlice
