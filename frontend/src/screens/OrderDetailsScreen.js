@@ -140,10 +140,16 @@ useEffect(() => {
 
   return (
 
+    <>
+      {isLoading ? (
+        <Loader />
+      ) : isError ? (
+        <Message variant="danger">
+          {isError?.data.message || isError.error}
+        </Message>
+      ) : (
 
-
-    isLoading ? ( <Loader/>) : isError ? ( <Message  variant={'danger'}/> ) : (
-
+    
 
 
     <div>
@@ -297,9 +303,9 @@ useEffect(() => {
       </Container>
     </div>
 
+    )}
+    </>
   )
-
-  )
-}
+};
 
 export default OrderDetailsScreen;

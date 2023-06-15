@@ -13,6 +13,12 @@ code {
 }
 
 
+#basic-nav-dropdown{
+
+  color: white;
+}
+
+
 .productDetailsPrice{
 
    margin-top: 200px;
@@ -54,6 +60,11 @@ code {
 
   margin: 60px  !important;
   
+}
+
+#basic-nav-dropdown{
+
+  color: white;
 }
 
 .alertBox{

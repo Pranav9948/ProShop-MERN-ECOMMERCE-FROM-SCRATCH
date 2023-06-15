@@ -4,10 +4,6 @@ import asyncHandler from "./asyncHandler.js";
 
 const protect = asyncHandler(async (req, res, next) => {
 
-    console.log('reach')
-
-    console.log("cook",req.cookies)
-
   let token;
 
   
@@ -15,7 +11,7 @@ const protect = asyncHandler(async (req, res, next) => {
    // Read JWT from the 'jwt' cookie
    token = req.cookies.jwt;
 
-  console.log('token',token)
+
 
   if (token) {
     try {
@@ -36,7 +32,8 @@ const protect = asyncHandler(async (req, res, next) => {
 const admin = asyncHandler((req, res, next) => {
 
     if(req.user && req.user.isAdmin){
-
+ 
+      
         next()
     }
 

@@ -24,22 +24,19 @@ console.log('123reach');
 const getSingleProduct=asyncHandler(async(req, res) => {
 
     const productDetail = await Product.findById(req.params.id)
-  
-  
+
     if(productDetail){
      return   res.json(productDetail);
     }
-  
-  
+   
     res.status(404);
     throw new Error('product not found...')
-  
-  
   
   })
 
 
   export{
      getAllProducts,
-     getSingleProduct
+     getSingleProduct,
+
   }
