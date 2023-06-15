@@ -1,16 +1,20 @@
 import React, { useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import { useGetProductsQuery } from "../../redux/slices/productsApiSlice";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { FaRegEdit, FaRegTrashAlt } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { useAddProductMutation, useDeleteProductMutation } from "../../redux/slices/adminSlice";
 import { toast } from "react-toastify";
+import Paginate from "../../components/Paginate";
 
 const ListAllProducts = () => {
 
-  const { data: products, isLoading, isError,refetch } = useGetProductsQuery();
+    const {pageNumber}=useParams()
+    console.log('34',pageNumber)
+
+  const { data: products, isLoading, isError,refetch } = useGetProductsQuery({pageNumber});
   const [addProduct, { isLoading: addProLoad, isError: addproErr }] =useAddProductMutation();
   const [deleteProduct,{isLoading:deletePro,isError:deleteErr}]=useDeleteProductMutation()
 
@@ -103,7 +107,7 @@ const deleteProductHandler=async(ids)=>{
                   </tr>
                 </thead>
                 <tbody>
-                  {products?.map((pro, idx) => (
+                  {products?.products?.map((pro, idx) => (
                     <tr className="p-5" key={pro.price}>
                       <td>{idx + 1}</td>
                       <td>
@@ -139,6 +143,8 @@ const deleteProductHandler=async(ids)=>{
                   ))}
                 </tbody>
               </Table>
+
+              <Paginate page={products.page} pages={products.pages} isAdmin={true}/>
             </Row>
           </Container>
         </div>
