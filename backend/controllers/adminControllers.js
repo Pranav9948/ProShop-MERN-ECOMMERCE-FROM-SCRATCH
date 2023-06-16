@@ -9,7 +9,7 @@ import Product from "../models/productModel.js";
 
 const getUserById = asyncHandler(async (req, res) => {
   
-     console.log('param',req.params.id);
+   
 
      const userDetails=await User.findById(req.params.id)
 
@@ -37,7 +37,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
     
    const allUsers=await User.find({})
 
-   console.log(allUsers)
+
 
    if(!allUsers){
 
@@ -63,7 +63,7 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 const deleteUserById = asyncHandler(async (req, res) => {
   
-    console.log('param',req.params.id);
+
 
     const userDetails=await User.findById(req.params.id)
 
@@ -91,7 +91,7 @@ const deleteUserById = asyncHandler(async (req, res) => {
 // @access  Private
 
 const updateUserById = asyncHandler(async (req, res) => {
-    console.log('param',req.params.id);
+    
 
 
     const userDetails=await User.findById(req.params.id)
@@ -125,7 +125,7 @@ const updateUserById = asyncHandler(async (req, res) => {
 // @access  Private
 
 const updateOrderToDelivered = asyncHandler(async (req, res) => {
-  console.log("1hjhj23", req.params.id);
+
 
   const orderDetails = await Order.findById(req.params.id);
 
@@ -149,7 +149,7 @@ const updateOrderToDelivered = asyncHandler(async (req, res) => {
 const getAllOrders = asyncHandler(async (req, res) => {
   const showAllOrders = await Order.find({}).populate("user", "id name email");
 
-  console.log("1235", showAllOrders);
+
   res.status(200).json(showAllOrders);
 });
 
@@ -158,7 +158,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
 // @access  Private
 
 const addNewProduct = asyncHandler(async (req, res) => {
-  console.log("addproductreach");
+ 
 
   const newProduct = new Product({
     name: "sample",
@@ -189,16 +189,14 @@ const addNewProduct = asyncHandler(async (req, res) => {
 // @access  Private
 
 const editProduct = asyncHandler(async (req, res) => {
-  console.log("editproductreach", req.params.id);
+  
 
   const products = await Product.findById(req.params.id);
 
   const { name, price, image, brand, category, countInStock, description } =
     req.body;
 
-  console.log("345", name, price);
-
-  console.log(products);
+ 
 
   if (products) {
     const updatedproduct = await Product.findByIdAndUpdate(req.params.id, {
@@ -213,7 +211,7 @@ const editProduct = asyncHandler(async (req, res) => {
 
     await updatedproduct.save();
 
-    console.log("updated", updatedproduct);
+   
 
     res.status(200).json(updatedproduct);
   } else {
@@ -226,15 +224,14 @@ const editProduct = asyncHandler(async (req, res) => {
 // @route   DELETE /api/admin/deleteproducts/:id
 
 const deleteProduct = asyncHandler(async (req, res) => {
-  console.log("deletepro", req.params.id);
+  
 
   const products = await Product.findById(req.params.id);
 
-  console.log("prod", products);
   if (products) {
     const deletedproduct = await Product.findByIdAndDelete(req.params.id);
 
-    console.log("updated", deletedproduct);
+    
 
     res.status(200).json({ message: "product Deleted succesfully" });
   } else {

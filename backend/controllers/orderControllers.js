@@ -17,7 +17,7 @@ const createNewOrder = asyncHandler(async (req, res) => {
     totalprice,
   } = req.body;
 
-  console.log('tott',totalprice)
+
 
   if (!orderItems && orderItems.length === 0) {
     res.status(400);
@@ -42,7 +42,7 @@ const createNewOrder = asyncHandler(async (req, res) => {
     });
 
     const newOrder = await order.save();
-    console.log('new order',newOrder)
+   
 
     res.status(201).json(newOrder);
   }
@@ -53,6 +53,9 @@ const createNewOrder = asyncHandler(async (req, res) => {
 // @access  Private
 
 const getMyOrders = asyncHandler(async (req, res) => {
+
+ 
+
   const myOrder = await Order.find({ user: req.user._id });
 
   if (myOrder.length === 0) {
@@ -69,10 +72,9 @@ const getMyOrders = asyncHandler(async (req, res) => {
 const getMyOrdersById = asyncHandler(async (req, res) => {
 
 
- console.log('req',req.params.id)
 
   const orderDetails =  await Order.findById(req.params.id);
-  console.log('order',orderDetails);
+ 
 
 
   if (orderDetails.length === 0) {
@@ -90,7 +92,6 @@ const getMyOrdersById = asyncHandler(async (req, res) => {
 
 const updateMyOrdersDetailsById = asyncHandler(async (req, res) => {
 
- console.log("reacokk34h",req.params.id);
 
 
   const OrderDetails = await Order.findById(req.params.id);

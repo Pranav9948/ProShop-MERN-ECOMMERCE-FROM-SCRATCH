@@ -16,7 +16,6 @@ const PlaceOrderScreen = () => {
    
    const [ createOrder,{isLoading,isError}]=useCreateOrderMutation()
 
-   console.log('234',totalprice)
 
   useEffect(() => {
     if (!shippingAddress) {
@@ -47,7 +46,7 @@ const placeOrder=async(e)=>{
 
       
 
-        console.log('res',res)
+     
 
 
 

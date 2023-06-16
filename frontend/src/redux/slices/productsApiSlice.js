@@ -10,6 +10,7 @@ export const productApiSlice=apiSlice.injectEndpoints({
             query:({keyword,pageNumber})=>({
                 url:PRODUCTS_URL,
                 params:{
+                    keyword,
                     pageNumber,
                     
                 },

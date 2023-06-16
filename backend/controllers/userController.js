@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res) => {
   generateToken(res, user._id);
 
   if (user && (await user.matchPassword(password))) {
-    console.log("12", user);
+   
     res.status(200).json({
       _id: user._id,
       name: user.name,
@@ -63,11 +63,11 @@ const registerUser = asyncHandler(async (req, res) => {
       password,
     });
 
-    console.log('newUser',newUser)
+    
 
     generateToken(res,newUser._id);
 
-    console.log('user success')
+    
     res.status(200).send({ message: "user created successfully", newUser });
   }
 
@@ -115,7 +115,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 const updateUserProfile = asyncHandler(async (req, res) => {
   
-   console.log('updatereach',req.body);
+ 
   
   const user = await User.findById(req.user._id);
 

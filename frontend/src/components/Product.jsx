@@ -19,7 +19,7 @@ const Product = ({ product,key }) => {
           <Card.Text>
            {product.category}
           </Card.Text>
-          <Button variant="primary">Add to Cart</Button>
+           <Link to={`/product/${product._id}`}> <Button variant="primary">View Details</Button> </Link>
         </Card.Body>
       </Card>
     </div>

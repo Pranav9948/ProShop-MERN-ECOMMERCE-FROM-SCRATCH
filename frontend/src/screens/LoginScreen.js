@@ -21,6 +21,8 @@ const LoginScreen = () => {
 
   const [login, { isLoading ,isError }] = useLoginMutation();
 
+
+
   const { search } = useLocation();
   const sp = new URLSearchParams(search);
 
@@ -75,21 +77,23 @@ const LoginScreen = () => {
         toast("login successfully");
         navigate("/");
       } catch (err) {
-        console.log("err", err);
         toast(err?.data?.message || err.error);
+        console.log("err", err);
+        navigate('/login')
+        
       }
     }
   };
 
+  
+
   return (
     <>
-      {isLoading ? (
+      {isLoading && (
         <Loader />
-      ) : isError ? (
-        <Message variant="danger">
-          {isError?.data.message || isError.error}
-        </Message>
-      ) : (
+      ) 
+      }
+      
         <div>
           <FormContainer>
             <Container>
@@ -143,9 +147,11 @@ const LoginScreen = () => {
             </Container>
           </FormContainer>
         </div>
-      )}
+
+      
+     
     </>
-  );
-};
+  )
+}
 
 export default LoginScreen;

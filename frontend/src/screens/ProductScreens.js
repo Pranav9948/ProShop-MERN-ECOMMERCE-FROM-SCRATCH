@@ -77,9 +77,9 @@ const ProductScreens = () => {
         <Meta title={productDetails.name}/ >
           <Container>
             <Row>
-              <Col lg={4} md={4} sm={12}>
+              <Col lg={4} md={4} sm={12} className="mt-5">
                 <Link to="/">
-                  <Button className="bg-dark mt-4 mb-5">Go Back</Button>
+                  <Button className="bg-dark mt-4 mb-5 ms-4">Go Back</Button>
                 </Link>
 
                 <Image
@@ -114,11 +114,11 @@ const ProductScreens = () => {
 
               <Col lg={3} md={3} sm={12} className="text-center">
                 <ListGroup className="ps-4 productDetailsPrice">
-                  <ListGroup.Item>
+                  <ListGroup.Item className="border propagelist">
                     Price :{" "}
                     <span className="ps-3">₹ {productDetails.price} </span>
                   </ListGroup.Item>
-                  <ListGroup.Item>
+                  <ListGroup.Item className="border propagelist">
                     status:{" "}
                     <span className="ps-3">
                       {productDetails.countInStock === 0
@@ -128,7 +128,7 @@ const ProductScreens = () => {
                   </ListGroup.Item>
 
                   {productDetails.countInStock > 0 && (
-                    <ListGroup.Item className="p-3">
+                    <ListGroup.Item className="border propagelist">
                       <Row>
                         <Col>Qty :</Col>
 
@@ -150,13 +150,13 @@ const ProductScreens = () => {
                   )}
 
                   {productDetails.countInStock === 0 ? (
-                    <ListGroup.Item>
+                    <ListGroup.Item className="border propagelist">
                       <Button className="bg-success" disabled>
                         Add to Cart{" "}
                       </Button>
                     </ListGroup.Item>
                   ) : (
-                    <ListGroup.Item className="p-3">
+                    <ListGroup.Item className="border propagelist">
                       <Button className="bg-success" onClick={addToCartHandler}>
                         Add to Cart{" "}
                       </Button>
@@ -167,8 +167,8 @@ const ProductScreens = () => {
             </Row>
 
             <Row style={{ marginTop: "130px" }}>
-              <Col md={6} sm={12}>
-                <h3>Read Reviews </h3>
+              <Col md={6} sm={12} className="">
+                <h3 className="mb-5 ms-5 " >Read Reviews </h3>
 
                 {productDetails.reviews.length === 0 ? (
                   <div className="mt-5 text-center" style={{ width: "300px" }}>
@@ -202,14 +202,27 @@ const ProductScreens = () => {
               </Col>
              
 
-              
-
+       
               <Col md={5} sm={12}>
 
               {
                 addReviewLoad && <Loader/>
+                
               }
-                <div className="text-center">
+          
+
+          {
+            addReviewErr && <Message variant={"danger"}>
+          {addReview?.data.message || isError.error}
+        </Message>
+          }
+
+
+
+
+
+
+                <div className="text-center mb-5 mt-5">
                   <Message variant={"dark"}>Write a Customer Review</Message>
                   </div>
 
@@ -248,6 +261,7 @@ const ProductScreens = () => {
                   </Form>
                 
               </Col>
+              
             </Row>
           </Container>
         </div>

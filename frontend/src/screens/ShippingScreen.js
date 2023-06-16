@@ -62,7 +62,7 @@ const ShippingScreen = () => {
       try {
 
 
-        console.log(address,city,postalCode,country)
+       
         dispatch(saveShippingAddress({address,city,postalCode,country}))
         navigate('/payment-method')
 

@@ -9,12 +9,18 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <div className="App">
-      <Header />
-      <main className="py-4" style={{marginTop:'80px'}}>
-        <Outlet />
-      </main>
-      <Footer />
-      <ToastContainer/>
+      <div className="fixed-header">
+        <Header />
+      </div>
+      <div className="content-wrap">
+        <main className="py-4" style={{ marginTop: '150px' }}>
+          <Outlet />
+        </main>
+      </div>
+      <footer className="fixed-footer" style={{ marginTop: 'calc(100vh - 300px)' }}>
+        <Footer />
+      </footer>
+      <ToastContainer />
     </div>
   );
 }

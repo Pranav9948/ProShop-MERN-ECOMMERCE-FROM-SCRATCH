@@ -32,7 +32,7 @@ const submitHandler=(e)=>{
 
 
      e.preventDefault()
-    console.log('1234',paymentmethod)
+   
     dispatch(savePaymentMethod(paymentmethod))
     navigate('/place-order')
      

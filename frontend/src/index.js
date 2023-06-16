@@ -36,6 +36,7 @@ import EditProduct from "./screens/Admin/EditProduct";
 import ShowAllUsers from "./screens/Admin/ShowAllUsers";
 import EditUser from "./screens/Admin/EditUser";
 import {HelmetProvider} from 'react-helmet-async'
+import ViewMyOrders from "./screens/ViewMyOrders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,6 +70,8 @@ const router = createBrowserRouter(
 
         <Route path="/profile" element={<UsersProfileScreen />} />
 
+        <Route path="/view-myorders" element={<ViewMyOrders />} />
+
 {/* 
           AdminRoutes component */}
 
@@ -78,7 +81,7 @@ const router = createBrowserRouter(
         <Route path="/admin/ordersList" element={<OrderListScreen />} />
         <Route path="/admin/orderDetails/:id" element={<AdminOrderDetails />} />
         <Route path="/admin/listallproducts" element={<ListAllProducts/>} />
-        <Route path="/admin/listallproducts/:page" element={<ListAllProducts/>} />
+        <Route path="/admin/listallproducts/:pageNumber" element={<ListAllProducts/>} />
         <Route path="/admin/editproduct/:id" element={<EditProduct/>} />
         <Route path="/admin/showallusers" element={<ShowAllUsers/>} />
         <Route path="/admin/edituser/:id" element={<EditUser/>} />

@@ -109,9 +109,7 @@ const addReview=asyncHandler(async(req, res) => {
 
 const getTopRatedProducts=asyncHandler(async(req, res) => {
 
-   console.log('toppp')
-
-     const topProducts=await Product.find({}).sort({rating:-1}).limit(3)
+   const topProducts=await Product.find({}).sort({rating:-1}).limit(3)
 
      res.status(200).json(topProducts)
  

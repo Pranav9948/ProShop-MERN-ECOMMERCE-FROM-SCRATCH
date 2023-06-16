@@ -54,11 +54,11 @@ const CartScreen = () => {
           <Message variant={"danger"}>No items in cart </Message>
         ) : (
           <Row>
-            <h2>Shopping Cart</h2>
+            <h2 className="mb-5 cartHead">Shopping Cart</h2>
 
             {cartItems.map((items, idx) => (
               <Col
-                key={items.image}
+                key={items.price}
                 lg={7}
                 md={7}
                 xs={12}

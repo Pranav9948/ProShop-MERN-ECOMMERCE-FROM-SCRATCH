@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="bg-dark text-white p-4 text-center">
         <Row>
           <Container>
-            <Col>&copy; copyRights@proshop-{getFullYear}</Col>
+            <Col>&copy; copyRights@wristWorks-{getFullYear}</Col>
           </Container>
         </Row>
       </div>

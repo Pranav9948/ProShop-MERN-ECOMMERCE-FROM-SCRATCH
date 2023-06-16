@@ -34,7 +34,7 @@ const cartSlice = createSlice({
     saveShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
 
-      console.log("shipp", action.payload);
+      
 
       return cartCalculations(state);
     },
@@ -43,7 +43,7 @@ const cartSlice = createSlice({
     savePaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
 
-      console.log("payment", action.payload);
+     
 
       return cartCalculations(state);
     },

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
@@ -12,6 +12,7 @@ import {clearCart} from '../redux/slices/cartSlice'
 function OrderDetailsScreen() {
   const { id } = useParams();
    const dispatch=useDispatch()
+   const navigate= useNavigate()
 
   const { userInfo } = useSelector((state) => state.login);
  
@@ -95,6 +96,7 @@ useEffect(() => {
 
     toast.success('Order is paid');
     dispatch(clearCart())
+    navigate('/view-myorders')
     
   }
 
@@ -136,7 +138,6 @@ useEffect(() => {
 
 
 
-  console.log("34", order);
 
   return (
 

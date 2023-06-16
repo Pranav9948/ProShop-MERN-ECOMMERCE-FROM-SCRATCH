@@ -19,7 +19,7 @@ const HomeScreen = () => {
 
     const {data:topProducts,isLoading:topLoad,isError:topErr}=useGetTopProductsQuery()
 
- console.log('344',topProducts)
+ 
 
   return (
 
@@ -44,8 +44,7 @@ const HomeScreen = () => {
 
     
       <div>
-      <h1 className="text-center mt-5 mb-5">welcome to proshop</h1>
-
+   
      
 
 
