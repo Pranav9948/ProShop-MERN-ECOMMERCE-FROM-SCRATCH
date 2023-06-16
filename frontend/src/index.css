@@ -33,6 +33,27 @@ code {
 
 }
 
+.searchBox{
+
+  margin-left: 100px;
+}
+
+body
+ {
+  
+overflow-x
+: hidden;
+}
+
+.carouselImage{
+
+  width: 100%;
+  height: 500px;
+}
+
+
+
+
 @media only screen and (max-width: 600px) {
   .productDetailsPrice{
 
@@ -40,7 +61,39 @@ code {
     margin-left: 30px;
  }
 
+ .protext{
+  display: none;
+ }
 
+ .carouselImage{
+
+  width: 100%;
+  height: 260px;
+}
+
+
+
+
+
+
+
+ .searchBox{
+
+  width: 180px;
+  margin-left: -10px;
+}
+
+ .searchBTN :hover{
+
+   background-color: red;
+   color:'white'
+}
+
+
+.searchBTN{
+
+  width: 70px;
+}
 
  .navbarz{
 

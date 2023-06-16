@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/slices/cartSlice";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Meta from "../components/Meta";
 
 const ProductScreens = () => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const ProductScreens = () => {
         </Message>
       ) : (
         <div>
+        <Meta title={productDetails.name}/ >
           <Container>
             <Row>
               <Col lg={4} md={4} sm={12}>

@@ -2,23 +2,31 @@ import React  from "react";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
 import Product from "../components/Product";
-import { useGetProductsQuery } from "../redux/slices/productsApiSlice";
+import { useGetProductsQuery, useGetTopProductsQuery } from "../redux/slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
+import { Button } from "react-bootstrap";
+import TopRatedCarousel from "../components/TopRatedCarousel";
+
 
 const HomeScreen = () => {
 
-  const {pageNumber}=useParams()
+  const {pageNumber,keyword}=useParams()
 
-   const {data:products,isLoading,isError}=useGetProductsQuery({pageNumber});
+   const {data:products,isLoading,isError}=useGetProductsQuery({keyword,pageNumber});
 
- 
+    const {data:topProducts,isLoading:topLoad,isError:topErr}=useGetTopProductsQuery()
+
+ console.log('344',topProducts)
 
   return (
 
     <>
+    {
+      keyword && <Link to='/'><Button className="ms-5" variant="warning"> Go Back</Button></Link>
+    }
     
 
 {
@@ -34,10 +42,25 @@ const HomeScreen = () => {
     ) : 
     (
 
+    
       <div>
       <h1 className="text-center mt-5 mb-5">welcome to proshop</h1>
 
-      <Row>
+     
+
+
+      {topLoad && <Loader/>}
+
+     { !keyword && <TopRatedCarousel topPro={topProducts}/> }
+
+
+
+
+
+
+
+
+      <Row className="mt-5">
         {products.products?.map((product,idx) => (
           <Col sm={12} md={6} lg={4} key={idx+2}>
             <Product product={product} />
@@ -56,20 +79,14 @@ const HomeScreen = () => {
 
     <Col md={3} xs={4}>
 
-    <Paginate pages={products.pages} page={products.page} />
+    <Paginate pages={products.pages} page={products.page} keyword={keyword ? keyword : ""} />
 
       
     </Col>
 
     </Row>
  
-    
-
-  
-
-
-
-
+   
          
     </div>
   )

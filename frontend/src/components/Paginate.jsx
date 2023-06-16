@@ -19,7 +19,7 @@ console.log('pages',pages,page)
           <LinkContainer
             key={x + 1}
             to={
-              !isAdmin ?`/page/${x + 1}`
+              !isAdmin ?  keyword ?   `/search/${keyword}/page/${x + 1}`:`/page/${x + 1}`
                 : `/admin/listallproducts/${x + 1}`
             }
           >

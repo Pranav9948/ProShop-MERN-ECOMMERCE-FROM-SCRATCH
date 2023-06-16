@@ -9,13 +9,17 @@ import asyncHandler from "../middleware/asyncHandler.js";
 
 const getAllProducts=asyncHandler(async(req, res) => {
     
-console.log('123reach');
 
-const pageSize=2;
+
+const keyword=req.query.keyword ? {name:{$regex:req.query.keyword,$options:'i'}} :{};
+
+
+
+const pageSize=6;
 const page=Number(req.query.pageNumber)|| 1;
-const count=await Product.countDocuments()
+const count=await Product.countDocuments({...keyword})
 
-    const products=await Product.find({}).limit(pageSize).skip(pageSize*(page-1))
+    const products=await Product.find({...keyword}).limit(pageSize).skip(pageSize*(page-1))
 
     res.json({products,page,pages:Math.ceil(count/pageSize)})
 })
@@ -94,6 +98,24 @@ const addReview=asyncHandler(async(req, res) => {
 
 
     })
+
+
+
+
+    // @desc    get top rated product
+// @route   GET /api/products/top
+// @access  Public
+
+
+const getTopRatedProducts=asyncHandler(async(req, res) => {
+
+   console.log('toppp')
+
+     const topProducts=await Product.find({}).sort({rating:-1}).limit(3)
+
+     res.status(200).json(topProducts)
+ 
+ })
     
 
 
@@ -107,6 +129,7 @@ const addReview=asyncHandler(async(req, res) => {
   export{
      getAllProducts,
      getSingleProduct,
-     addReview
+     addReview,
+     getTopRatedProducts
 
   }

@@ -7,10 +7,11 @@ export const productApiSlice=apiSlice.injectEndpoints({
     endpoints:(builder)=>({
 
         getProducts:builder.query({
-            query:({pageNumber})=>({
+            query:({keyword,pageNumber})=>({
                 url:PRODUCTS_URL,
                 params:{
                     pageNumber,
+                    
                 },
             }),
 
@@ -35,11 +36,19 @@ export const productApiSlice=apiSlice.injectEndpoints({
         body:data
        
       }),
-    }),         
+    }),
+    
+    getTopProducts:builder.query({
+        query:()=>({
+            url:`${PRODUCTS_URL}/top`
+        }),
+
+        keepUnusedDataFor:5,
+    }),
     
        
     })
 })
 
 
-export const {useGetProductsQuery,useGetProductDetailsQuery,useAddReviewMutation}=productApiSlice
+export const {useGetProductsQuery,useGetProductDetailsQuery,useAddReviewMutation,useGetTopProductsQuery}=productApiSlice
