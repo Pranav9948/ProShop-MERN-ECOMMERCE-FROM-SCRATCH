@@ -15,7 +15,7 @@ const keyword=req.query.keyword ? {name:{$regex:req.query.keyword,$options:'i'}}
 
 
 
-const pageSize=6;
+const pageSize=process.env.PAGINATION_LIMIT;
 const page=Number(req.query.pageNumber)|| 1;
 const count=await Product.countDocuments({...keyword})
 
