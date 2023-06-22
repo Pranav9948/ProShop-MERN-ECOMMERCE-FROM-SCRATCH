@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <div className="content-wrap">
         <main className="py-4" style={{ marginTop: '150px' }}>
           <Outlet />
+          <ScrollToTop></ScrollToTop>
+
         </main>
       </div>
       <footer className="fixed-footer" style={{ marginTop: 'calc(100vh - 300px)' }}>

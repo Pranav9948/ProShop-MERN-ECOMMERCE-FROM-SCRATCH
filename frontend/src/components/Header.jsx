@@ -36,16 +36,7 @@ const Header = () => {
     }
   };
 
-  const handleFormsSubmit = (e) => {
-    e.preventDefault();
-
-    if (keyword.trim()) {
-      setKeyword("");
-      navigate(`/search/${keyword}`);
-    } else {
-      navigate("/");
-    }
-  };
+  
 
   return (
     <div>
@@ -61,31 +52,9 @@ const Header = () => {
             </LinkContainer>
           </Navbar.Brand>
 
-          {userInfo !== null && 
+         
 
-          <div className="searchBox">
-            <Form
-              className="d-flex align-items-center searchBox"
-              onSubmit={handleFormsSubmit}
-            >
-              <Form.Group className="mb-3 me-2  mt-3">
-                <Form.Control
-                  type="name"
-                  value={keyword}
-                  onChange={(e) => setKeyword(e.target.value)}
-                />
-              </Form.Group>
-              <Button
-                type="submit"
-                variant="outline-danger"
-                className="searchBTN"
-              >
-                Search
-              </Button>
-            </Form>
-          </div>
-
-          }
+          
 
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

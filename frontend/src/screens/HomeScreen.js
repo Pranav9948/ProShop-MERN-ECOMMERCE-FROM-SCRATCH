@@ -5,10 +5,12 @@ import Product from "../components/Product";
 import { useGetProductsQuery, useGetTopProductsQuery } from "../redux/slices/productsApiSlice";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Paginate from "../components/Paginate";
 import { Button } from "react-bootstrap";
 import TopRatedCarousel from "../components/TopRatedCarousel";
+import { useDispatch, useSelector } from "react-redux";
+import Search from "../components/Search";
 
 
 const HomeScreen = () => {
@@ -19,6 +21,12 @@ const HomeScreen = () => {
 
     const {data:topProducts,isLoading:topLoad,isError:topErr}=useGetTopProductsQuery()
 
+    
+    const { userInfo } = useSelector((state) => state.login);
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+  
  
 
   return (
@@ -47,6 +55,8 @@ const HomeScreen = () => {
    
      
 
+     
+
 
       {topLoad && <Loader/>}
 
@@ -54,6 +64,9 @@ const HomeScreen = () => {
 
 
 
+     <div className="mt-5  mb-5 d-flex justify-content-center align-items-center">
+  <Search />
+</div>
 
 
 
@@ -71,6 +84,7 @@ const HomeScreen = () => {
    
     <Row>
 
+  
     <Col md={9} xs={8}>
 
     </Col>
